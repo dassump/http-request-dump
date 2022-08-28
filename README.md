@@ -16,12 +16,12 @@ Usage of ./http-request-dump:
 
 ```shell
 $ http-request-dump
-2022/05/17 14:27:57 Listening on 0.0.0.0:8888
+>>> 2022/05/17 14:27:57 Listening on 0.0.0.0:8888
 ```
 
 ```shell
 $ http-request-dump -listen 127.0.0.1:8080
-2022/05/17 14:28:22 Listening on 127.0.0.1:8080
+>>> 2022/05/17 14:28:22 Listening on 127.0.0.1:8080
 ```
 
 ## Examples
@@ -30,7 +30,7 @@ $ http-request-dump -listen 127.0.0.1:8080
 ```
 $ curl -X GET "127.0.0.1:8888"
 
-2022/05/17 14:23:37 Request from 127.0.0.1:58609
+>>> 2022/05/17 14:23:37 Request from 127.0.0.1:58609
 GET / HTTP/1.1
 Host: 127.0.0.1:8888
 Accept: */*
@@ -40,7 +40,7 @@ User-Agent: curl/7.79.1
 ```
 $ curl -X GET "localhost:8888/page?parameter=value&also=another"
 
-2022/05/17 14:33:35 Request from 127.0.0.1:58715
+>>> 2022/05/17 14:33:35 Request from 127.0.0.1:58715
 GET /page?parameter=value&also=another HTTP/1.1
 Host: localhost:8888
 Accept: */*
@@ -52,7 +52,7 @@ User-Agent: curl/7.79.1
 ```
 $ curl -X POST 127.0.0.1:8888/form -d username=test -d password=test
 
-2022/05/17 14:36:39 Request from 127.0.0.1:58734
+>>> 2022/05/17 14:36:39 Request from 127.0.0.1:58734
 POST /form HTTP/1.1
 Host: 127.0.0.1:8888
 Accept: */*
@@ -66,7 +66,7 @@ username=test&password=test
 ```
 $ curl -X POST 127.0.0.1:8888/api -H "Content-Type: application/json" -d "{\"key\":\"value\"}"
 
-2022/05/17 14:48:32 Request from 127.0.0.1:58970
+>>> 2022/05/17 14:48:32 Request from 127.0.0.1:58970
 POST /api HTTP/1.1
 Host: 127.0.0.1:8888
 Accept: */*
@@ -80,7 +80,7 @@ User-Agent: curl/7.79.1
 ```
 $ curl -X POST 127.0.0.1:8888/form -F "file=@empty.png"
 
-2022/05/17 14:41:15 Request from 127.0.0.1:58814
+>>> 2022/05/17 14:41:15 Request from 127.0.0.1:58814
 POST /form HTTP/1.1
 Host: 127.0.0.1:8888
 Accept: */*

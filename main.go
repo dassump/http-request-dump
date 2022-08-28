@@ -20,6 +20,7 @@ func init() {
 }
 
 func main() {
+	log.SetPrefix(">>> ")
 	log.Println("Listening on", listen)
 	log.Fatal(http.ListenAndServe(listen, http.HandlerFunc(
 		func(w http.ResponseWriter, r *http.Request) {
