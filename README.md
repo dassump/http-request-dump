@@ -2,12 +2,13 @@
 
 Server that listens for any http request and logs the full dump of the request.
 
-## Usage
+## Getting started
 
-Listens at 0.0.0.0:8888 by default.
+1. Download a pre-compiled binary from the release [page](https://github.com/dassump/http-request-dump/releases).
+2. Run `http-request-dump --help`
 
 ```shell
-$ http-request-dump -h
+$ http-request-dump --help
 http-request-dump (dev)
 
 HTTP request dump server
@@ -17,6 +18,10 @@ Usage of http-request-dump:
   -listen string
         Server address and port (default "0.0.0.0:8888")
 ```
+
+## Usage
+
+Listens at 0.0.0.0:8888 by default.
 
 ```shell
 $ http-request-dump
