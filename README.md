@@ -2,14 +2,18 @@
 
 Server that listens for any http request and logs the full dump of the request.
 
-
 ## Usage
 
 Listens at 0.0.0.0:8888 by default.
 
 ```shell
 $ http-request-dump -h
-Usage of ./http-request-dump:
+http-request-dump (dev)
+
+HTTP request dump server
+https://github.com/dassump/http-request-dump
+
+Usage of http-request-dump:
   -listen string
         Server address and port (default "0.0.0.0:8888")
 ```
@@ -46,7 +50,6 @@ Host: localhost:8888
 Accept: */*
 User-Agent: curl/7.79.1
 ```
-
 
 ### POST
 ```
@@ -97,3 +100,7 @@ Content-Type: image/png
 IHDR��&PLTE�����tRNS@��f9IDATx^��1� ����X������YIEND�B`�
 --------------------------9fc5f46d87def612--
 ```
+
+## Contributing
+
+Bug reports and pull requests are welcome on GitHub at https://github.com/dassump/http-request-dump.
