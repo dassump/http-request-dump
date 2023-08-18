@@ -50,14 +50,28 @@ $ http-request-dump --listen 0.0.0.0:8080 --body=false
 >>> 2023/08/18 09:59:54 HTTP server listening on 0.0.0.0:8080
 ```
 
+### Environment variables
+
+* HTTPREQUESTDUMP_LISTEN - define server address and port
+* HTTPREQUESTDUMP_BODY - enable/disable dump request body
+
+```
+HTTPREQUESTDUMP_LISTEN=0.0.0.0:8080 HTTPREQUESTDUMP_BODY=false http-request-dump
+>>> 2023/08/18 13:17:44 HTTP server listening on 0.0.0.0:8080
+```
+
 ### Container
 
 A precompiled version is available as a container on [dockerhub](https://hub.docker.com/r/dassump/http-request-dump).
 
-
 ```
 $ docker run --rm -p 8888:8888 dassump/http-request-dump
-2023/08/18 13:38:15 Listening on 0.0.0.0:8888
+>>> 2023/08/18 16:22:51 HTTP server listening on 0.0.0.0:8888
+```
+
+```
+$ docker run --rm -p 8080:8080 -e HTTPREQUESTDUMP_LISTEN=0.0.0.0:8080 -e HTTPREQUESTDUMP_BODY=false dassump/http-request-dump
+>>> 2023/08/18 16:21:49 HTTP server listening on 0.0.0.0:8080
 ```
 
 ## Examples
