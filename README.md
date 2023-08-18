@@ -1,111 +1,129 @@
 # http-request-dump
 
-Server that listens for any http request and logs the full dump of the request.
+HTTP server that reply the complete dump of the request. Useful for debugging and troubleshooting.
 
 ## Getting started
 
 1. Download a pre-compiled binary from the release [page](https://github.com/dassump/http-request-dump/releases).
 2. Run `http-request-dump --help`
 
-```shell
+```
 $ http-request-dump --help
-http-request-dump (dev)
+NAME:
+   http-request-dump - HTTP request dump server
 
-HTTP request dump server
-https://github.com/dassump/http-request-dump
+USAGE:
+   http-request-dump [global options] [arguments...]
 
-Usage of http-request-dump:
-  -listen string
-        Server address and port (default "0.0.0.0:8888")
+VERSION:
+   devel
+
+DESCRIPTION:
+   https://github.com/dassump/http-request-dump
+
+AUTHOR:
+   Daniel Dias de Assumpção <dassump@gmail.com>
+
+GLOBAL OPTIONS:
+   --listen value, -l value  server address and port (default: "0.0.0.0:8888") [$HTTPREQUESTDUMP_LISTEN]
+   --body, -b                dump request body (default: true) [$HTTPREQUESTDUMP_BODY]
+   --help, -h                show help
+   --version, -v             print the version
+
+COPYRIGHT:
+   http://www.apache.org/licenses/LICENSE-2.0
 ```
 
 ## Usage
 
-Listens at 0.0.0.0:8888 by default.
+HTTP server listens at 0.0.0.0:8888 and request body dump is enabled by default.
 
-```shell
+To change the listening address use the `--listen` flag and for body dump use the `--body` flag.
+
+```
 $ http-request-dump
->>> 2022/05/17 14:27:57 Listening on 0.0.0.0:8888
+>>> 2023/08/18 09:59:14 HTTP server listening on 0.0.0.0:8888
 ```
 
-```shell
-$ http-request-dump -listen 127.0.0.1:8080
->>> 2022/05/17 14:28:22 Listening on 127.0.0.1:8080
+```
+$ http-request-dump --listen 0.0.0.0:8080 --body=false
+>>> 2023/08/18 09:59:54 HTTP server listening on 0.0.0.0:8080
+```
+
+### Container
+
+A precompiled version is available as a container on [dockerhub](https://hub.docker.com/r/dassump/http-request-dump).
+
+
+```
+$ docker run --rm -p 8888:8888 dassump/http-request-dump
+2023/08/18 13:38:15 Listening on 0.0.0.0:8888
 ```
 
 ## Examples
 
-### GET
 ```
 $ curl -X GET "127.0.0.1:8888"
-
->>> 2022/05/17 14:23:37 Request from 127.0.0.1:58609
 GET / HTTP/1.1
 Host: 127.0.0.1:8888
 Accept: */*
-User-Agent: curl/7.79.1
+User-Agent: curl/7.88.1
 ```
 
 ```
 $ curl -X GET "localhost:8888/page?parameter=value&also=another"
-
->>> 2022/05/17 14:33:35 Request from 127.0.0.1:58715
 GET /page?parameter=value&also=another HTTP/1.1
 Host: localhost:8888
 Accept: */*
-User-Agent: curl/7.79.1
+User-Agent: curl/7.88.1
 ```
 
-### POST
 ```
 $ curl -X POST 127.0.0.1:8888/form -d username=test -d password=test
-
->>> 2022/05/17 14:36:39 Request from 127.0.0.1:58734
 POST /form HTTP/1.1
 Host: 127.0.0.1:8888
 Accept: */*
 Content-Length: 27
 Content-Type: application/x-www-form-urlencoded
-User-Agent: curl/7.79.1
+User-Agent: curl/7.88.1
 
 username=test&password=test
 ```
 
 ```
 $ curl -X POST 127.0.0.1:8888/api -H "Content-Type: application/json" -d "{\"key\":\"value\"}"
-
->>> 2022/05/17 14:48:32 Request from 127.0.0.1:58970
 POST /api HTTP/1.1
 Host: 127.0.0.1:8888
 Accept: */*
 Content-Length: 15
 Content-Type: application/json
-User-Agent: curl/7.79.1
+User-Agent: curl/7.88.1
 
 {"key":"value"}
 ```
 
 ```
-$ curl -X POST 127.0.0.1:8888/form -F "file=@empty.png"
-
->>> 2022/05/17 14:41:15 Request from 127.0.0.1:58814
+$ curl -X POST 127.0.0.1:8888/form -F "file=@empty.png" --output -
 POST /form HTTP/1.1
 Host: 127.0.0.1:8888
 Accept: */*
 Content-Length: 328
-Content-Type: multipart/form-data; boundary=------------------------9fc5f46d87def612
-User-Agent: curl/7.79.1
+Content-Type: multipart/form-data; boundary=------------------------ee98747b7b09e4ce
+User-Agent: curl/7.88.1
 
---------------------------9fc5f46d87def612
+--------------------------ee98747b7b09e4ce
 Content-Disposition: form-data; name="file"; filename="empty.png"
 Content-Type: image/png
 
-�PNG
+?PNG
 
-IHDR��&PLTE�����tRNS@��f9IDATx^��1� ����X������YIEND�B`�
---------------------------9fc5f46d87def612--
+IHDR??&PLTE?????tRNS@??f9IDATx^??1? ????X??????YIEND?B`?
+--------------------------ee98747b7b09e4ce--
 ```
 
 ## Contributing
 
 Bug reports and pull requests are welcome on GitHub at https://github.com/dassump/http-request-dump.
+
+## License
+See [LISENSE](https://github.com/dassump/http-request-dump/blob/main/LICENSE) file.
